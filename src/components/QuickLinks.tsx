@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import { useNavigate } from 'react-router-dom';
 import { 
   GraduationCap, 
   Shield, 
@@ -112,6 +113,16 @@ const services = [
 ];
 
 const QuickLinks = () => {
+  const navigate = useNavigate();
+
+  const handleCardClick = (type: string) => {
+    if (type === 'skill-development') {
+      navigate('/skill-development');
+    } else {
+      navigate('/jobs');
+    }
+  };
+
   return (
     <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
@@ -124,7 +135,11 @@ const QuickLinks = () => {
             {quickLinks.map((link, index) => {
               const IconComponent = link.icon;
               return (
-                <Card key={index} className="group hover:shadow-medium transition-all duration-300 cursor-pointer border border-border hover:border-primary/20">
+                <Card 
+                  key={index} 
+                  className="group hover:shadow-medium transition-all duration-300 cursor-pointer border border-border hover:border-primary/20"
+                  onClick={() => handleCardClick('jobs')}
+                >
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
                       <div className={`p-3 rounded-lg ${link.bgColor}`}>
@@ -158,7 +173,11 @@ const QuickLinks = () => {
             {specialCategories.map((category, index) => {
               const IconComponent = category.icon;
               return (
-                <Card key={index} className="group hover:shadow-medium transition-all duration-300 cursor-pointer border border-border hover:border-primary/20">
+                <Card 
+                  key={index} 
+                  className="group hover:shadow-medium transition-all duration-300 cursor-pointer border border-border hover:border-primary/20"
+                  onClick={() => handleCardClick('jobs')}
+                >
                   <CardContent className="p-6 text-center">
                     <div className={`inline-flex p-4 rounded-full ${category.bgColor} mb-4`}>
                       <IconComponent className={`w-8 h-8 ${category.color}`} />
@@ -185,7 +204,11 @@ const QuickLinks = () => {
             {services.map((service, index) => {
               const IconComponent = service.icon;
               return (
-                <Card key={index} className="group hover:shadow-medium transition-all duration-300 cursor-pointer border border-border hover:border-primary/20">
+                <Card 
+                  key={index} 
+                  className="group hover:shadow-medium transition-all duration-300 cursor-pointer border border-border hover:border-primary/20"
+                  onClick={() => handleCardClick(service.title === 'Skill Development' ? 'skill-development' : 'jobs')}
+                >
                   <CardContent className="p-6 text-center">
                     <IconComponent className={`w-12 h-12 ${service.color} mx-auto mb-4`} />
                     <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">

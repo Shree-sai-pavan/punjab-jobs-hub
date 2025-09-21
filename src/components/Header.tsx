@@ -1,8 +1,11 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Search, Menu, User, Bell } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <header className="bg-primary text-primary-foreground shadow-medium">
       {/* Top Bar */}
@@ -43,11 +46,20 @@ const Header = () => {
               <Bell className="w-4 h-4 mr-2" />
               Notifications
             </Button>
-            <Button variant="ghost" size="sm" className="text-primary-foreground hover:bg-primary-foreground/10">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-primary-foreground hover:bg-primary-foreground/10"
+              onClick={() => navigate('/login')}
+            >
               <User className="w-4 h-4 mr-2" />
               Login
             </Button>
-            <Button variant="secondary" size="sm">
+            <Button 
+              variant="secondary" 
+              size="sm"
+              onClick={() => navigate('/register')}
+            >
               Register
             </Button>
           </div>
@@ -62,24 +74,24 @@ const Header = () => {
       <nav className="bg-primary/90 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="flex items-center space-x-8 py-3">
-            <a href="#" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
+            <Link to="/" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
               Home
-            </a>
-            <a href="#" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
+            </Link>
+            <Link to="/jobs" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
               All Jobs
-            </a>
-            <a href="#" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
+            </Link>
+            <Link to="/jobs" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
               Government Jobs
-            </a>
-            <a href="#" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
+            </Link>
+            <Link to="/jobs" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
               Walk-in Interviews
-            </a>
-            <a href="#" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
+            </Link>
+            <Link to="/skill-development" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
               Skill Development
-            </a>
-            <a href="#" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
+            </Link>
+            <Link to="/skill-development" className="text-primary-foreground hover:text-saffron transition-colors font-medium">
               Career Guidance
-            </a>
+            </Link>
           </div>
         </div>
       </nav>

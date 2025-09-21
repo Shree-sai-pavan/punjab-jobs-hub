@@ -1,9 +1,12 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Search, MapPin, Briefcase, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import heroImage from '@/assets/punjab-govt-building.jpg';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative bg-gradient-to-br from-primary via-primary to-accent overflow-hidden">
       {/* Background Image Overlay */}
@@ -42,11 +45,21 @@ const HeroSection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" variant="secondary" className="bg-saffron text-saffron-foreground hover:bg-saffron/90">
+              <Button 
+                size="lg" 
+                variant="secondary" 
+                className="bg-saffron text-saffron-foreground hover:bg-saffron/90"
+                onClick={() => navigate('/jobs')}
+              >
                 <Search className="w-5 h-5 mr-2" />
                 Search Jobs
               </Button>
-              <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                onClick={() => navigate('/register')}
+              >
                 <Users className="w-5 h-5 mr-2" />
                 Register Now
               </Button>
@@ -107,7 +120,11 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              <Button className="w-full" size="lg">
+              <Button 
+                className="w-full" 
+                size="lg"
+                onClick={() => navigate('/jobs')}
+              >
                 <Search className="w-5 h-5 mr-2" />
                 Search Jobs
               </Button>

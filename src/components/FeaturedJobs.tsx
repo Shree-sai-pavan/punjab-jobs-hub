@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Calendar, Clock, Bookmark, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const jobsData = [
   {
@@ -86,6 +87,7 @@ const jobsData = [
 ];
 
 const JobCard = ({ job }: { job: typeof jobsData[0] }) => {
+  const navigate = useNavigate();
   const daysLeft = Math.ceil((new Date(job.deadline).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
   
   return (
@@ -152,10 +154,18 @@ const JobCard = ({ job }: { job: typeof jobsData[0] }) => {
           </div>
           
           <div className="flex gap-2 pt-4">
-            <Button className="flex-1" size="sm">
+            <Button 
+              className="flex-1" 
+              size="sm"
+              onClick={() => navigate('/jobs')}
+            >
               Apply Now
             </Button>
-            <Button variant="outline" size="sm">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate('/jobs')}
+            >
               View Details
             </Button>
           </div>
@@ -166,6 +176,8 @@ const JobCard = ({ job }: { job: typeof jobsData[0] }) => {
 };
 
 const FeaturedJobs = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -185,7 +197,11 @@ const FeaturedJobs = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" variant="outline">
+          <Button 
+            size="lg" 
+            variant="outline"
+            onClick={() => navigate('/jobs')}
+          >
             View All Jobs
           </Button>
         </div>
