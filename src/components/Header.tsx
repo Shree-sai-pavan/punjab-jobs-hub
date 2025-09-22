@@ -1,10 +1,17 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Search, Menu, User, Bell } from 'lucide-react';
+import { Search, Menu, User, Bell, LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   return (
     <header className="bg-primary text-primary-foreground shadow-medium">
@@ -46,22 +53,41 @@ const Header = () => {
               <Bell className="w-4 h-4 mr-2" />
               Notifications
             </Button>
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="text-primary-foreground hover:bg-primary-foreground/10"
-              onClick={() => navigate('/login')}
-            >
-              <User className="w-4 h-4 mr-2" />
-              Login
-            </Button>
-            <Button 
-              variant="secondary" 
-              size="sm"
-              onClick={() => navigate('/register')}
-            >
-              Register
-            </Button>
+            {user ? (
+              <>
+                <span className="text-sm text-primary-foreground/80">
+                  Welcome, {user.email}
+                </span>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-primary-foreground hover:bg-primary-foreground/10"
+                  onClick={handleLogout}
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-primary-foreground hover:bg-primary-foreground/10"
+                  onClick={() => navigate('/login')}
+                >
+                  <User className="w-4 h-4 mr-2" />
+                  Login
+                </Button>
+                <Button 
+                  variant="secondary" 
+                  size="sm"
+                  onClick={() => navigate('/register')}
+                >
+                  Register
+                </Button>
+              </>
+            )}
           </div>
 
           <Button variant="ghost" size="sm" className="md:hidden text-primary-foreground">
